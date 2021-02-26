@@ -1,0 +1,6 @@
+# license: SEE LICENSE IN LICENSE.md [MUST NOT BE REMOVED]
+
+.idea
+__pycache__
+venv
+generated
