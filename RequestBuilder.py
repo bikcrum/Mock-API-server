@@ -76,6 +76,9 @@ class Response:
                 return Randomizer().get_random_string()
 
             if schema.get('type') == 'integer':
+                if type(schema.get('enum')) is list:
+                    return schema.get('enum')[random.randint(0, len(schema.get('enum')) - 1)]
+
                 return Randomizer().get_random_integer()
 
             if schema.get('type') == 'number':
