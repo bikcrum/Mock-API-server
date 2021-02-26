@@ -71,4 +71,7 @@ if __name__ == '__main__':
     for route in mp.get_routes():
         view_func = app.route(route['rule'], methods=[route['method']])(process_request)
 
+    print('Active endpoints')
+    mp.show()
+
     app.run(port=args.port)

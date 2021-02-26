@@ -34,7 +34,7 @@ class BaseMockApi:
 
     def show(self):
         for request in self.requests:
-            print(request)
+            print(f"-> {request.method} {request.request_url}")
 
 
 class MockApi(BaseMockApi):
