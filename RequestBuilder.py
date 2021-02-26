@@ -88,8 +88,6 @@ class Response:
             if schema.get('type') == 'object':
                 new_dict = {}
                 for prop in schema['properties']:
-                    if prop == 'type':
-                        continue
                     if default_value is not None and prop in default_value:
                         new_dict[prop] = default_value[prop]
                     else:
