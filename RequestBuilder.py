@@ -66,6 +66,27 @@ class Response:
         self.status_code = None
         self.response_schema = None
 
+    @staticmethod
+    def _get_default_value(schema, default_value):
+        try:
+            if schema.get('type') == 'string':
+                return str(default_value)
+
+            if schema.get('type') == 'integer':
+                return int(default_value)
+
+            if schema.get('type') == 'number':
+                return float(default_value)
+
+            if schema.get('type') == 'boolean':
+                return bool(default_value)
+
+            return default_value
+
+        except ValueError as e:
+            print(e)
+            return None
+
     def _data_from_schema(self,
                           schema,
                           default_value,
@@ -92,9 +113,13 @@ class Response:
                 new_dict = {}
                 for prop in schema['properties']:
                     if default_value is not None and prop in default_value:
-                        new_dict[prop] = default_value[prop]
-                    else:
-                        new_dict[prop] = self._data_from_schema(schema['properties'][prop], default_value, list_size)
+                        def_val = self._get_default_value(schema['properties'][prop],
+                                                          default_value[prop])
+                        if def_val is not None:
+                            new_dict[prop] = def_val
+                            continue
+
+                    new_dict[prop] = self._data_from_schema(schema['properties'][prop], default_value, list_size)
                 return new_dict
 
             if schema.get('type') == 'array':
