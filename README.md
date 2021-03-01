@@ -1,3 +1,5 @@
+license: SEE LICENSE IN LICENSE.md [MUST NOT BE REMOVED]
+
 ### Mock API Server
 Create your own mock server with API documentation services such as Swagger.
 
@@ -17,8 +19,8 @@ Create your own mock server with API documentation services such as Swagger.
 5. Use the following to serve your file `python app.py -s /path/to/swagger.json`
 ##### Extended use
 ```
-usage: app.py [-h] -s SOURCE [-p PORT] [-t {swagger}] [-sc STATUS_CODE] [-r RANDOM_SEED] [-d DEFAULT_VALUE [DEFAULT_VALUE ...]]
-              [-l LIST_SIZE [LIST_SIZE ...]]
+usage: app.py [-h] -s SOURCE [-p PORT] [-t {swagger}] [-sc STATUS_CODE] [-r RANDOM_SEED] [-l LIST_SIZE [LIST_SIZE ...]] [-m [META]]
+              [-d DEFAULT_VALUE [DEFAULT_VALUE ...]]
 
 Options for mock responses
 
@@ -39,12 +41,14 @@ Required and optional arguments:
   -r RANDOM_SEED, --random_seed RANDOM_SEED
                         (Optional) Generates random responses based on seed value.
 
-  -d DEFAULT_VALUE [DEFAULT_VALUE ...], --default_value DEFAULT_VALUE [DEFAULT_VALUE ...]
-                        (Optional) Sets default values in response body. Format key=value.
-
   -l LIST_SIZE [LIST_SIZE ...], --list_size LIST_SIZE [LIST_SIZE ...]
                         (Optional,default=[2]) Sets default size of list in response body.
 
+  -m [META], --meta [META]
+                        (Optional,default=[true]) Shows the datatype of all parameters
+  
+  -d DEFAULT_VALUE [DEFAULT_VALUE ...], --default_value DEFAULT_VALUE [DEFAULT_VALUE ...]
+                        (Optional) Sets default values in response body. Format key=value.
 ```
 
 If you would like to donate or know more contact: `bikcrum@gmail.com`

@@ -1,32 +1,30 @@
 # license: SEE LICENSE IN LICENSE.md [MUST NOT BE REMOVED]
 
-from RequestBuilder import SwaggerRequestBuilder, Request
+from Preference import Preference
+from RequestBuilder import SwaggerRequestBuilder
+from RequestModel import Request
 
 
 class BaseMockApi:
-    def __init__(self):
+    def __init__(self, preference):
         self.requests: [Request] = []
+        if preference is None:
+            raise Exception('Preference cannot be null')
+        self.preference = preference
 
     def get_routes(self) -> [tuple]:
         return [{'rule': request.request_url, 'method': request.method} for request in self.requests]
 
     def process_request(self,
                         user_request,
-                        params,
-                        status_code,
-                        random_seed,
-                        default_value,
-                        list_size):
+                        params):
 
         for request in self.requests:
             validated_data = request.validate(url=user_request.url_rule.rule,
                                               method=user_request.method,
                                               req_body=None,
                                               params=params,
-                                              status_code=status_code,
-                                              random_seed=random_seed,
-                                              default_value=default_value,
-                                              list_size=list_size)
+                                              pref=self.preference)
             if validated_data is not None:
                 return validated_data
 
@@ -38,8 +36,8 @@ class BaseMockApi:
 
 
 class MockApi(BaseMockApi):
-    def __init__(self, api_type):
-        super().__init__()
+    def __init__(self, api_type, preference: Preference):
+        super().__init__(preference)
         self.api_type = api_type
 
     def build_requests(self, path):
