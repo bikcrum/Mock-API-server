@@ -7,12 +7,12 @@ from RequestModel import Request
 
 class BaseMockApi:
     def __init__(self, preference):
-        self.requests: [Request] = []
+        self.requests: list[Request] = []
         if preference is None:
             raise Exception('Preference cannot be null')
         self.preference = preference
 
-    def get_routes(self) -> [tuple]:
+    def get_routes(self) -> list[tuple]:
         return [{'rule': request.request_url, 'method': request.method} for request in self.requests]
 
     def process_request(self,
