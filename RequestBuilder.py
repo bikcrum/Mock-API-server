@@ -9,7 +9,7 @@ from RequestModel import Response, Request
 class BaseRequestBuilder:
     def __init__(self, filepath):
         self.filepath = filepath
-        self.buffer = open(filepath, 'r')
+        self.buffer = open(file=filepath, mode='r', encoding='utf-8')
         os.makedirs('generated', exist_ok=True)
         self.generated = open(os.path.join('generated', os.path.basename(filepath)), 'w')
 
@@ -59,7 +59,7 @@ class SwaggerRequestBuilder(BaseRequestBuilder):
 
         return ref
 
-    def build(self) -> [Request]:
+    def build(self) -> list[Request]:
         requests = []
 
         for path, child in self.data['paths'].items():

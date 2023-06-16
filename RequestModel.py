@@ -12,7 +12,7 @@ class Request:
         self.method = None
         self.parameters = None
         self.request_schema = None
-        self.responses: [Response] = None
+        self.responses: list[Response] = None
 
     def validate(self, url,
                  method,
